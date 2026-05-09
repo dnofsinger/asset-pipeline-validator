@@ -31,8 +31,3 @@ def check_no_spaces(file_path: Path) -> list[Violation]:
             file_path=file_path,
         )
     ]
-
-# OLD FUNCTION
-def has_valid_version(filename: str) -> bool:
-    pattern = r"_v\d{3}"
-    return bool(re.search(pattern, filename))

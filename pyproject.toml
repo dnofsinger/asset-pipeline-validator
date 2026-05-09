@@ -1,0 +1,12 @@
+[project]
+name = "asset-pipeline-validator"
+version = "0.1.0"
+description = "Validation tooling for art and game asset pipelines."
+requires-python = ">=3.12"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
