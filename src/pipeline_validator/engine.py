@@ -1,5 +1,6 @@
 from pathlib import Path
-from pipeline_validator.rules import Violation, check_version, check_no_spaces
+
+from pipeline_validator.rules import Violation, check_no_spaces, check_version
 
 RULES = [
     check_version,

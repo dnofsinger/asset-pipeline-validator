@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from pipeline_validator.rules import check_version, check_no_spaces
+from pipeline_validator.rules import check_no_spaces, check_version
 
 
 def test_check_version_passes():
