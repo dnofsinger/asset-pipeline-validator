@@ -1,6 +1,9 @@
+import getopt
+import sys
 from importlib.metadata import version
 from pathlib import Path
-import sys, getopt
+
+from pipeline_validator.engine import run_rules
 
 
 def get_version() -> str:
@@ -50,8 +53,10 @@ def main() -> int:
             print(f"Error: The file path '{path}' is not a directory.")
             return 2
 
-        #TODO: Implement the actual validation logic here.
-        print(f"TODO! Validating files in directory: {path}")
+        print(f"Validating files in directory: {path}")
+        violations = run_rules([path])
+        for violation in violations:
+            print(f"Violation found: {violation.rule_id} - {violation.message}")
 
     except getopt.error as err:
         print(str(err))

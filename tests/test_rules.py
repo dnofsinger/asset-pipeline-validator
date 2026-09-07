@@ -1,7 +1,14 @@
 from pathlib import Path
 
-from pipeline_validator.rules import check_no_spaces, check_version
+from pipeline_validator.rules import check_no_spaces, check_scenes_folder_exists, check_version
 
+
+def test_check_scenes_folder_exists_passes(tmp_path: Path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    scenes_folder = Path.cwd() / "scenes"
+    scenes_folder.mkdir()
+    violations = check_scenes_folder_exists(Path.cwd())
+    assert violations == []
 
 def test_check_version_passes():
     violations = check_version(Path("knight_v001.fbx"))

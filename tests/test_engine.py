@@ -11,4 +11,4 @@ def test_run_rules_collects_violations():
 
     violations = run_rules(files)
 
-    assert len(violations) == 2
+    assert len(violations) == 4
