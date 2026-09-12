@@ -32,7 +32,7 @@ def check_version(file_path: Path) -> list[Violation]:
     return [
         Violation(
             rule_id="VERSION_001",
-            message="Filename must include a version like _v001.",
+            message="File name must include a version like _v001.",
             file_path=file_path,
         )
     ]

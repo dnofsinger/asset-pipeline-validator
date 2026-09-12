@@ -54,9 +54,11 @@ def main() -> int:
             return 2
 
         print(f"Validating files in directory: {path}")
-        violations = run_rules([path])
+        violations = run_rules(path)
         for violation in violations:
-            print(f"Violation found: {violation.rule_id} - {violation.message}")
+            print(f"Violation found: {violation.rule_id} - "
+                  f"{violation.message} - "
+                  f"{violation.file_path}")
 
     except getopt.error as err:
         print(str(err))
