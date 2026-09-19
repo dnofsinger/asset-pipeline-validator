@@ -4,11 +4,13 @@ from pipeline_validator.rules import (
     Violation,
     check_no_spaces,
     check_scenes_folder_exists,
+    check_textures_folder_exists,
     check_version,
 )
 
 DIRECTORY_RULES = [
     check_scenes_folder_exists,
+    check_textures_folder_exists,
 ]
 
 FILE_RULES = [

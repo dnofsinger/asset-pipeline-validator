@@ -18,6 +18,12 @@ def main() -> int:
     Main method for pipeline validator
     """
 
+    GREEN = "\033[32m"
+    RED = "\033[31m"
+    YELLOW = "\033[33m"
+    RESET = "\033[0m"
+
+
     args = sys.argv[1:]
     options = "hv"
     long_options = ["help", "version"]
@@ -53,12 +59,21 @@ def main() -> int:
             print(f"Error: The file path '{path}' is not a directory.")
             return 2
 
+        # Validating files by running through rules.
         print(f"Validating files in directory: {path}")
         violations = run_rules(path)
         for violation in violations:
             print(f"Violation found: {violation.rule_id} - "
                   f"{violation.message} - "
                   f"{violation.file_path}")
+
+        # TODO: Print out list of items with [PASS] or [FAIL]
+        print("Validating character folder: johnny_tigerfox")
+        print(f"{GREEN}[PASS]{RESET} scenes/ folder exists")
+        print(f"{RED}[FAIL]{RESET} textures/ folder missing")
+        print(f"{RED}[FAIL]{RESET} exports/ folder missing")
+        print(f"{GREEN}[PASS]{RESET} correct version names")
+        print(f"{GREEN}[PASS]{RESET} no spaces in names")
 
     except getopt.error as err:
         print(str(err))
