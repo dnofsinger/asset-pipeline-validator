@@ -36,7 +36,7 @@ def check_textures_folder_exists(file_path: Path) -> list[Violation]:
     return [
         Violation(
             rule_id="FOLDER_001",
-            message="The 'scenes' folder must exist.",
+            message="The 'textures' folder must exist.",
             file_path=file_path,
         )
     ]

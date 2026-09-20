@@ -11,4 +11,4 @@ def test_run_rules_collects_violations(tmp_path: Path):
 
     violations = run_rules(tmp_path)
 
-    assert len(violations) == 2
+    assert len(violations) == 3
