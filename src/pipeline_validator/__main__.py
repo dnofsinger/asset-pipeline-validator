@@ -23,7 +23,6 @@ def main() -> int:
     YELLOW = "\033[33m"
     RESET = "\033[0m"
 
-
     args = sys.argv[1:]
     options = "hv"
     long_options = ["help", "version"]
@@ -59,6 +58,20 @@ def main() -> int:
             print(f"Error: The file path '{path}' is not a directory.")
             return 2
 
+        # Dictionary for keeping track of rules and pass/fail status
+        # true = pass, false = fail
+        ruleStatus: dict[str, bool] = {
+            "scenes/ folder exists" : True,
+            "textures/ folder exists" : False,
+            "exports/ folder exists" : True,
+            "correct version names" : True,
+            "no spaces in names" : True,
+        }
+        #ruleStatus["scenes/ folder exists"] = True
+        print(ruleStatus["scenes/ folder exists"])
+
+        #TODO: Pass in the ruleStatus dict or pass them into run_rules to set the status flags.
+
         # Validating files by running through rules.
         print(f"Validating files in directory: {path}")
         violations = run_rules(path)
@@ -67,13 +80,9 @@ def main() -> int:
                   f"{violation.message} - "
                   f"{violation.file_path}")
 
-        # TODO: Print out list of items with [PASS] or [FAIL]
-        print("Validating character folder: johnny_tigerfox")
-        print(f"{GREEN}[PASS]{RESET} scenes/ folder exists")
-        print(f"{RED}[FAIL]{RESET} textures/ folder missing")
-        print(f"{RED}[FAIL]{RESET} exports/ folder missing")
-        print(f"{GREEN}[PASS]{RESET} correct version names")
-        print(f"{GREEN}[PASS]{RESET} no spaces in names")
+        for rule_name, passed in ruleStatus.items():
+            status = f"{GREEN}[PASS]{RESET}" if passed else f"{RED}[FAIL]{RESET}"
+            print(f"{status} - {rule_name}")
 
     except getopt.error as err:
         print(str(err))
