@@ -2,7 +2,8 @@ import getopt
 import sys
 from importlib.metadata import version
 from pathlib import Path
-
+from pipeline_validator.constants import RuleName
+from pipeline_validator.rules import Rule
 from pipeline_validator.engine import run_rules
 
 
@@ -11,7 +12,6 @@ def get_version() -> str:
     Get the version of the package
     """
     return version("asset-pipeline-validator")
-
 
 def main() -> int:
     """
@@ -58,19 +58,13 @@ def main() -> int:
             print(f"Error: The file path '{path}' is not a directory.")
             return 2
 
-        # Dictionary for keeping track of rules and pass/fail status
-        # true = pass, false = fail
-        ruleStatus: dict[str, bool] = {
-            "scenes/ folder exists" : True,
-            "textures/ folder exists" : False,
-            "exports/ folder exists" : True,
-            "correct version names" : True,
-            "no spaces in names" : True,
-        }
-        #ruleStatus["scenes/ folder exists"] = True
-        print(ruleStatus["scenes/ folder exists"])
-
-        #TODO: Pass in the ruleStatus dict or pass them into run_rules to set the status flags.
+        ruleStatus = [
+            Rule(RuleName.SCENES_FOLDER, "The scenes/ folder must exist.", True),
+            Rule(RuleName.TEXTURES_FOLDER, "textures/ folder exists", True),
+            Rule(RuleName.EXPORTS_FOLDER, "exports/ folder exists", True),
+            Rule(RuleName.VERSION, "correct version names", True),
+            Rule(RuleName.NO_SPACES, "no spaces in names", True ),
+        ]
 
         # Validating files by running through rules.
         print(f"Validating files in directory: {path}")
@@ -79,10 +73,13 @@ def main() -> int:
             print(f"Violation found: {violation.rule_id} - "
                   f"{violation.message} - "
                   f"{violation.file_path}")
+            for rule in ruleStatus:
+                if rule.ruleName == violation.rule_id:
+                    rule.rulePass = False
 
-        for rule_name, passed in ruleStatus.items():
-            status = f"{GREEN}[PASS]{RESET}" if passed else f"{RED}[FAIL]{RESET}"
-            print(f"{status} - {rule_name}")
+        for rule in ruleStatus:
+            status = f"{GREEN}[PASS]{RESET}" if rule.rulePass else f"{RED}[FAIL]{RESET}"
+            print(f"{status} - {rule.ruleDesc}")
 
     except getopt.error as err:
         print(str(err))
