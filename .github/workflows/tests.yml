@@ -18,4 +18,4 @@ jobs:
           python-version: "3.12"
 
       - name: Run Tests
-        run: python -m unittest discover
+        run: python -m pytest ./tests/
