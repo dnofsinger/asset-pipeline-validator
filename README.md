@@ -18,7 +18,7 @@ Produces PASS and FAIL output along with violations in detail for proper Maya fo
 
 Example of character folder that has proper structure:
 
-```
+```text
 Validating files in directory: D:\02_ASSETS\characters\knight_character
 [PASS] - The scenes/ folder must exist.
 [PASS] - textures/ folder exists
@@ -30,10 +30,6 @@ Validating files in directory: D:\02_ASSETS\characters\knight_character
 ## Prerequisites
 
 - Must have at least Python 3.12 installed
-
-## Installation
-
-## Configuration
 
 ## Running the Application
 
@@ -47,8 +43,8 @@ Example:
 
 ```C:\> python __main__.py .\knight_character```
 
-## Folder Structure
+## Help
 
-## Troubleshooting
+Please log bugs in the Issues section of this repository.
 
-## Contributing
+I'll take suggestions into consideration.
